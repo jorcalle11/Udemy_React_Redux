@@ -1,0 +1,29 @@
+.country-enter {
+  opacity: 0;
+  transform: rotateX(90deg) rotateY(90deg);
+}
+
+.country-enter.country-enter-active {
+  opacity: 1;
+  transform: rotateX(0deg) rotateY(0deg);
+
+  transition: all 500ms ease-in;
+}
+
+.country-leave {
+  opacity: 1.0;
+}
+
+.country-leave.country-leave-active {
+  opacity: 0;
+  transition: all 400ms ease-out;
+}
+
+.country-appear {
+  opacity: 0.01;
+}
+
+.country-appear.country-appear-active {
+  opacity: 1;
+  transition: opacity .5s ease-in;
+}
