@@ -1,17 +1,10 @@
 import { connect } from 'react-redux'
 import NavbarApp from './nav'
-import { changeAuthentication } from '../../auth/authActions'
 
-const mapStateToProps = ({authenticated}) => {
+const mapStateToProps = ({auth}) => {
   return {
-    isLoggedIn: authenticated
+    isLoggedIn : auth.isLoggedIn
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    changeAuthentication : isLoggedIn => dispatch(changeAuthentication(isLoggedIn))
-  }
-}
-
-export default connect(mapStateToProps,mapDispatchToProps)(NavbarApp)
+export default connect(mapStateToProps)(NavbarApp)

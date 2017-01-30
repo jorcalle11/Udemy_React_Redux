@@ -5,13 +5,15 @@ export default function(ComposedComponent) {
   class Authentication extends Component {
 
     componentWillMount() {
-      if (!this.props.authenticated) {
+      const { isLoggedIn } = this.props.auth 
+      if (!isLoggedIn) {
         this.context.router.push('/')
       }
     }
 
     componentWillUpdate(nextProps) {
-      if (!nextProps.authenticated) {
+      const { isLoggedIn } = nextProps.auth      
+      if (!isLoggedIn) {
         this.context.router.push('/')
       }
     }
@@ -26,11 +28,11 @@ export default function(ComposedComponent) {
   }
 
   Authentication.propTypes = {
-    authenticated: PropTypes.bool.isRequired
+    auth: PropTypes.object.isRequired
   }
 
-  const mapStateToProps = ({authenticated}) => {
-    return { authenticated }
+  const mapStateToProps = ({auth}) => {
+    return { auth }
   }
 
   return connect(mapStateToProps)(Authentication)

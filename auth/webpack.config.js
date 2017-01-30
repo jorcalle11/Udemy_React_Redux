@@ -25,7 +25,7 @@ module.exports = {
       { test: /\.jsx?$/, exclude: /node_modules/, loader: 'eslint-loader' }
     ],
     loaders: [
-      { test: /\.jsx?$/, exclude: /node_modules/, loaders: ['react-hot','babel'] },
+      { test: /\.jsx?$/, exclude: /node_modules/, loaders: ['babel'] },
       { test: /\.css$/, loaders: ['style-loader','css-loader']},
       { test: /\.(ttf|otf|eot|svg|woff(2)?)$/, loader: 'url' }
     ]

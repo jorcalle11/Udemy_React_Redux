@@ -1,28 +1,38 @@
 import React, {Component, PropTypes} from 'react'
-import { Navbar,Button } from 'react-bootstrap'
+import { Navbar,Nav, NavItem} from 'react-bootstrap'
+import { LinkContainer } from 'react-router-bootstrap'
 import { Link } from 'react-router'
 
 export class NavbarApp extends Component {
   constructor() {
     super()
-    this.handleClickButton = this.handleClickButton.bind(this)
   }
 
-  handleClickButton() {
-    const { isLoggedIn,changeAuthentication } = this.props
-    changeAuthentication(!isLoggedIn)
+  renderLinks() {
+    return (
+      <Nav pullRight>
+        <LinkContainer to="/signup">
+          <NavItem eventKey={1}>Sign Up</NavItem>
+        </LinkContainer>
+        <LinkContainer to="/signin">
+          <NavItem eventKey={2}>Sign In</NavItem>
+        </LinkContainer>
+      </Nav>
+    )
   }
 
-  renderButton() {
-    let button = <Button bsStyle="success" onClick={this.handleClickButton}>Log In</Button>
-
-    if (this.props.isLoggedIn) {
-      button = <Button bsStyle="danger" onClick={this.handleClickButton}>Log Out</Button>
-    }
-    return button
+  renderLogout() {
+    return (
+      <Nav pullRight>
+        <LinkContainer to="/signout">
+          <NavItem eventKey={1}>Sign Out</NavItem>
+        </LinkContainer>
+      </Nav>
+    )
   }
 
   render() {
+    const { isLoggedIn } = this.props
     return (
       <div id="NavbarApp">
         <Navbar inverse>
@@ -32,17 +42,9 @@ export class NavbarApp extends Component {
             </Navbar.Brand>
             <Navbar.Toggle />
           </Navbar.Header>
-          <ul className="nav navbar-nav navbar-right">
-            <li role="presentation">
-              <Link to={'/'}>Home</Link>
-            </li>
-            <li role="presentation">
-              <Link to={'/resources'}>Resources</Link>
-            </li>
-            <li role="presentation" style={{paddingTop:'7px'}}>
-              {this.renderButton()}
-            </li>
-          </ul>
+          <Navbar.Collapse>
+          {isLoggedIn ? this.renderLogout() : this.renderLinks()}
+          </Navbar.Collapse>
         </Navbar>
       </div>
     )
@@ -51,8 +53,7 @@ export class NavbarApp extends Component {
 
 NavbarApp.propTypes = {
   nameApp: PropTypes.string,
-  isLoggedIn : PropTypes.bool,
-  changeAuthentication: PropTypes.func
+  isLoggedIn : PropTypes.bool
 }
 
 export default NavbarApp

@@ -7,6 +7,15 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap/dist/css/bootstrap-theme.css'
 import './index.css'
 import store from './store/index'
+import { getToken } from './auth/helpers'
+import { AUTH_SUCCESS } from './auth/authTypeActions'
+import {currentUser} from './auth/authActions'
+
+// check if user already authenticated
+if (getToken()) {
+  store.dispatch({ type: AUTH_SUCCESS })
+  store.dispatch(currentUser())
+}
 
 render(
   <Provider store={store}>
