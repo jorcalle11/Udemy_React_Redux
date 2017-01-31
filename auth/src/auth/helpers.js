@@ -22,9 +22,19 @@ function headerWithAuthorization() {
   }
 }
 
+function getPayload() {
+  const token = getToken()
+  if (token && token.split('.').length === 3){
+    const base64Url = token.split('.')[1]
+    const base64 = base64Url.replace('-','+').replace('-','/')
+    return JSON.parse(window.atob(base64))
+  }
+}
+
 export {
   headerWithAuthorization,
   saveToken,
   removeToken,
-  getToken
+  getToken,
+  getPayload
 }
